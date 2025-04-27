@@ -3,6 +3,7 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import axios from 'axios';
 import './App.css';
 
+
 import reactLogo from './assets/reacts.svg'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [scanStatus, setScanStatus] = useState('Scanning...');
   const [result,setResult] =useState()
   const scannerRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const API_BASE_URL = 'https://uemev-backend.onrender.com';
 
   function parseStringToJson(str) {
@@ -36,19 +38,23 @@ function App() {
 
   const addData = async (data) => {
     const { Name, "Event Id": EventId } = parseStringToJson(data);
+    setLoading(true); // Start loading
     try {
       const response = await axios.post(`${API_BASE_URL}/scanner`, {
         name: Name,
         eventId: EventId,
       });
       console.log(response.data);
-      setResult(response.data.success); // Store the response
+      setResult(response.data.success); // Store the result
       setScanStatus(response.data.success ? 'Scan successful!' : 'Verification failed');
     } catch (error) {
       console.error(error);
       setScanStatus('Scan failed. Try again.');
+    } finally {
+      setLoading(false); // Stop loading no matter success or error
     }
-  } 
+  };
+  
   
 
 
@@ -130,6 +136,11 @@ function App() {
       </div>
       <div className="scanning-animation"></div>
     </>
+  ) : loading ? (
+    <div className="loading-screen">
+      <div className="loading-spinner"></div>
+      <h3>Verifying Scan...</h3>
+    </div>
   ) : (
     <>
       {result ? (
@@ -160,6 +171,7 @@ function App() {
     </>
   )}
 </div>
+
 
 
         <div className="scanner-actions">
