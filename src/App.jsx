@@ -3,6 +3,8 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import axios from 'axios';
 import './App.css';
 
+import reactLogo from './assets/react.svg'
+
 function App() {
   const [scannedData, setScannedData] = useState(null);
   const [isScannerActive, setIsScannerActive] = useState(true);
@@ -99,12 +101,7 @@ function App() {
       <header className="app-header">
         <div className="logo-container">
         <div className="app-logo">
-  <img 
-    src="../src/assets/logo.png" 
-    alt="App Logo" 
-    className="logo-image" 
-    style={{ width: '100px', height: '100px', objectFit: 'contain' }}
-  />
+        <img src={reactLogo} className="logo react" alt="React logo" />
 </div>
           <div className="app-header-text">
             <h1>QR Scan Pro</h1>
