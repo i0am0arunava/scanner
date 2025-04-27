@@ -7,7 +7,7 @@ function App() {
   const [scannedData, setScannedData] = useState(null);
   const [isScannerActive, setIsScannerActive] = useState(true);
   const scannerRef = useRef(null);
-  const API_BASE_URL = 'http://192.168.152.58:4000';
+  const API_BASE_URL = 'https://uemev-backend.onrender.com';
 
   const addData = async (data) => {
     const response = await axios.post(`${API_BASE_URL}/scanner`, {
