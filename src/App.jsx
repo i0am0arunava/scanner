@@ -3,7 +3,7 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import axios from 'axios';
 import './App.css';
 
-import reactLogo from './assets/react.svg'
+import reactLogo from './assets/reacts.svg'
 
 function App() {
   const [scannedData, setScannedData] = useState(null);
