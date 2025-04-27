@@ -9,13 +9,31 @@ function App() {
   const scannerRef = useRef(null);
   const API_BASE_URL = 'https://uemev-backend.onrender.com';
 
-  const addData = async (data) => {
-    const response = await axios.post(`${API_BASE_URL}/scanner`, {
-      message: "hello",
+   const addData = async (data) => {
+    // Parse the data
+    const parsedData = {};
+  
+    // Split by commas first
+    const parts = data.split(',');
+  
+    parts.forEach(part => {
+      const [key, value] = part.split(':').map(str => str.trim());
+      parsedData[key] = value;
     });
-    console.log(response);
-    console.log(data)
-  }
+  
+    const { Name, "Event Id": EventId } = parsedData;
+  
+    console.log("Parsed Name:", Name);
+    console.log("Parsed Event Id:", EventId);
+  
+    // Now send only Name and Event Id
+    const response = await axios.post(`${API_BASE_URL}/scanner`, {
+      name: Name,
+      eventId: EventId,
+    });
+  
+    console.log(response.data);
+  } 
 
 const test =async()=>{
   const response = await axios.post(`${API_BASE_URL}/scanner`, {
