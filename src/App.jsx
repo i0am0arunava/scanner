@@ -101,7 +101,7 @@ function App() {
       <header className="app-header">
         <div className="logo-container">
         <div className="app-logo">
-        <img src={reactLogo} className="logo react" alt="React logo" />
+        <img src={reactLogo} className="logo react" alt="React logo"   style={{ width: '70px', height: '70px' }} />
 </div>
           <div className="app-header-text">
             <h1>QR Scan Pro</h1>
